@@ -24,15 +24,15 @@ export const LayoutSingle = (props: Props) => {
         <title>{title}</title>
         <link rel="shortcut icon" href="/assets/icons/favicon.ico"/>
 
-        <meta property="og:title" content="La Opinión del Altiplano"/>
+        <meta property="og:title" content="Veracruz Hoy"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:url" content="https://laopiniondelaltiplano.com"/>
-        <meta property="og:image" content="https://laopiniondelaltiplano.com/assets/icons/logoMeta.jpg"/>
-        <meta property="og:image/png" content="https://laopiniondelaltiplano.com/assets/icons/logo.png"/>
+        <meta property="og:url" content="https://veracruzhoy.com"/>
+        <meta property="og:image" content="https://veracruzhoy.com/assets/icons/logoMeta.jpg"/>
+        <meta property="og:image/png" content="https://veracruzhoy.com/assets/icons/logo.png"/>
 
-        <meta property="twitter:title" content="La Opinión del Altiplano"/>
-        <meta property="twitter:site" content="https://laopiniondelaltiplano.com"/>
-        <meta property="twitter:image" content="https://laopiniondelaltiplano.com/assets/icons/logo.png"/>
+        <meta property="twitter:title" content="Veracruz Hoy"/>
+        <meta property="twitter:site" content="https://veracruzhoy.com"/>
+        <meta property="twitter:image" content="https://veracruzhoy.com/assets/icons/logo.png"/>
       </Head>
 
       <Flex direction="column" flex="1">

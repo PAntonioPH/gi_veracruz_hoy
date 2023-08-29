@@ -20,7 +20,7 @@ const Index = () => {
   const handleClickPost = async (category: string, id: number) => await router.push(`/category/${category}/post/${id}`)
 
   return (
-    <LayoutSingle title={"La Opinión del Altiplano"}>
+    <LayoutSingle title={"Veracruz Hoy"}>
       {
         isLoading
           ? (<LoadingPage/>)
