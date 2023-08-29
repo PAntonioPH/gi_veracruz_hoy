@@ -2,66 +2,36 @@ import {NextApiRequest, NextApiResponse} from "next";
 import {conn} from "@/utils/database";
 import {message} from "@/utils/functions";
 
+interface Category {
+  id: number,
+  name: string,
+  father?: boolean
+}
+
 const Home = async (req: NextApiRequest, res: NextApiResponse) => {
   const {method} = req;
 
-  let response: any = {};
+  let response: any = {
+    categoriesPosts: {},
+    lastPosts: []
+  };
 
   switch (method) {
     case "GET":
       try {
-        const consultaResponse = [
-          {
-            name: "estado",
-            categories: [1],
-            limit: 1
-          },
-          {
-            name: "altiplano",
-            categories: [16],
-            limit: 3
-          },
-          {
-            name: "nacional",
-            categories: [4],
-            limit: 10
-          },
-          {
-            name: "internacional",
-            categories: [5],
-            limit: 10
-          },
-          {
-            name: "deporte",
-            categories: [2],
-            limit: 10
-          },
-          {
-            name: "espectaculo",
-            categories: [3],
-            limit: 1
-          },
-          {
-            name: "municipios",
-            categories: [6],
-            limit: 3
-          },
-          {
-            name: "circePolitico",
-            categories: [26],
-            limit: 1
-          },
-          {
-            name: "EstratagemaInversa",
-            categories: [27],
-            limit: 1
-          }
-        ]
+        let responseTemp = await conn.query(`SELECT c.id, c.name, c.father
+                                             FROM categories c
+                                             WHERE c.id != 0 
+                                                   AND c.active = true
+                                             AND c.father IS NULL
+                                             ORDER BY c.id; `)
 
-        for (let i = 0; i < consultaResponse.length; i++) {
-          const {name, categories, limit} = consultaResponse[i];
-          let where = ""
-          categories.forEach((category, index) => where += ` c.id = ${category} OR c.father = ${category} ${index < categories.length - 1 ? "OR" : ""} `)
+        let categories: Category[] = responseTemp.rows;
+
+        let categoriesPosts: any = {};
+
+        for (let i = 0; i < categories.length; i++) {
+          const {name, id} = categories[i];
 
           const categoryResponse = await conn.query(`SELECT p.id,
                                                             p.title,
@@ -72,25 +42,28 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
                                                               JOIN categories c on p.id_category = c.id
                                                      WHERE p.active = true
                                                        AND p.id_post_type = 1
-                                                       AND (${where})
-                                                     ORDER BY p.id DESC
-                                                     LIMIT ${limit};`)
+                                                       AND p.id_category = '${id}'
+                                                     ORDER BY p.id DESC LIMIT 5;`)
 
-          response[name] = categoryResponse.rows
+          categoriesPosts[name] = categoryResponse.rows
         }
 
-        const mostReadResponse = await conn.query(`SELECT p.id,
-                                                          p.title,
-                                                          p.img,
-                                                          c.url  as category,
-                                                          c.name as category_name
-                                                   FROM posts p
-                                                            JOIN categories c on p.id_category = c.id
-                                                   WHERE p.active = true
-                                                   ORDER BY p.visits DESC
-                                                   LIMIT 5;`)
+        for (const key in categoriesPosts) if (categoriesPosts[key].length === 0) delete categoriesPosts[key];
 
-        response.mostRead = mostReadResponse.rows
+        response.categoriesPosts = categoriesPosts;
+
+        const lastPosts = await conn.query(`SELECT p.id,
+                                                   p.title,
+                                                   p.img,
+                                                   c.url  as category,
+                                                   c.name as category_name
+                                            FROM posts p
+                                                     JOIN categories c on p.id_category = c.id
+                                            WHERE p.active = true
+                                              AND p.id_post_type = 1
+                                            ORDER BY p.id DESC LIMIT 10;`)
+
+        response.lastPosts = lastPosts.rows;
 
         return res.status(200).json(message("Home consultado", response));
       } catch (e) {
