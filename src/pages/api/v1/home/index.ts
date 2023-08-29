@@ -8,6 +8,13 @@ interface Category {
   father?: boolean
 }
 
+const toCamelCase = (str: string): string => str.replace(/\s(.)/g, function ($1) {
+  return $1.toUpperCase();
+}).replace(/\s/g, '').replace(/^(.)/, function ($1) {
+  return $1.toLowerCase();
+});
+
+
 const Home = async (req: NextApiRequest, res: NextApiResponse) => {
   const {method} = req;
 
@@ -45,7 +52,7 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
                                                        AND p.id_category = '${id}'
                                                      ORDER BY p.id DESC LIMIT 5;`)
 
-          categoriesPosts[name] = categoryResponse.rows
+          categoriesPosts[toCamelCase(name)] = categoryResponse.rows;
         }
 
         for (const key in categoriesPosts) if (categoriesPosts[key].length === 0) delete categoriesPosts[key];
