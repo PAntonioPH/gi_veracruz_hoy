@@ -20,7 +20,7 @@ interface Profile {
 export const TimelineFacebook = () => {
   const [posts, setPosts] = useState<Post[]>([])
   const [profile, setProfile] = useState<Profile>({
-    name: "La Opinión del Altiplano",
+    name: "Veracruz Hoy",
     picture: "/assets/icons/logoRRSS.png",
   })
   const [isLoading, setIsLoading] = useState(true)
