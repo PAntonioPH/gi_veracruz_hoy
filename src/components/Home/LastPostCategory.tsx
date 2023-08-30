@@ -1,0 +1,80 @@
+import {Box, Button, Center, Flex, Heading, Text} from "@chakra-ui/react";
+import React from "react";
+import {useRouter} from "next/router";
+
+interface PropsPost {
+  id: number,
+  title: string,
+  img: string,
+  content: string,
+  category: string,
+  category_name: string
+}
+
+export const LastPostCategory = ({post: {img, category_name, title, content, category, id}}: { post: PropsPost }) => {
+  const router = useRouter()
+
+  return (<Flex
+    w={"50%"}
+    direction={"column"}
+    h={"full"}
+    cursor={"pointer"}
+    onClick={() => router.push(`/category/${category}/post/${id}`)}
+  >
+    <Flex
+      bgImage={img}
+      bgSize={"cover"}
+      borderRadius={"md"}
+      h={"full"}
+      flexDirection={"column"}
+      justifyContent={"space-between"}
+      alignItems={"flex-start"}
+    >
+      <Text
+        px={5}
+        bg={"#bf3030"}
+        color={"white"}
+      >
+        {
+          category_name
+        }
+      </Text>
+    </Flex>
+    <Center>
+      <Box
+        position={"relative"}
+        bg={"white"}
+        bottom={"40px"}
+        w={"90%"}
+        px={5}
+      >
+        <Heading
+          size={"sm"}
+          color={"black"}
+          pt={5}
+          textAlign={"center"}
+        >
+          {title}
+        </Heading>
+
+        <Text>
+          {
+            content.slice(85)
+          }
+          {
+            content.length > 86
+            && "..."
+          }
+        </Text>
+        <Center>
+          <Button
+            variant={"outline"}
+            colorScheme={"gray"}
+          >
+            Leer más
+          </Button>
+        </Center>
+      </Box>
+    </Center>
+  </Flex>)
+}
