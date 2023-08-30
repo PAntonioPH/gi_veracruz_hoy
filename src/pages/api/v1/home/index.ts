@@ -1,6 +1,7 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {conn} from "@/utils/database";
 import {message} from "@/utils/functions";
+import {decodeHTML5} from "entities";
 
 interface Category {
   id: number,
@@ -43,6 +44,7 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
           const categoryResponse = await conn.query(`SELECT p.id,
                                                             p.title,
                                                             p.img,
+                                                            p.content,
                                                             c.url  as category,
                                                             c.name as category_name
                                                      FROM posts p
@@ -51,6 +53,8 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
                                                        AND p.id_post_type = 1
                                                        AND p.id_category = '${id}'
                                                      ORDER BY p.id DESC LIMIT 5;`)
+
+          if (categoryResponse.rows.length > 0) categoryResponse.rows.forEach((post: any) => post.content = decodeHTML5(post.content).replace(/<[^>]*>?/gm, ''));
 
           categoriesPosts[toCamelCase(name)] = categoryResponse.rows;
         }
@@ -62,6 +66,7 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
         const lastPosts = await conn.query(`SELECT p.id,
                                                    p.title,
                                                    p.img,
+                                                   p.content,
                                                    c.url  as category,
                                                    c.name as category_name
                                             FROM posts p
@@ -69,6 +74,8 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
                                             WHERE p.active = true
                                               AND p.id_post_type = 1
                                             ORDER BY p.id DESC LIMIT 10;`)
+
+        if (lastPosts.rows.length > 0) lastPosts.rows.forEach((post: any) => post.content = decodeHTML5(post.content).replace(/<[^>]*>?/gm, ''));
 
         response.lastPosts = lastPosts.rows;
 
