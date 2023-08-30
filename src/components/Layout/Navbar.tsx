@@ -38,7 +38,7 @@ export const Navbar = () => {
               alt="Portada"
               objectFit="cover"
               w={"full"}
-              h={"300px"}
+              h={"200px"}
               onClick={()=>router.push('/')}
               cursor={"pointer"}
             />
@@ -48,6 +48,8 @@ export const Navbar = () => {
             justify="space-between"
             px={{base: "5", lg: "10"}}
             py={{base: "5", lg: "5"}}
+            bg={"#19232d"}
+            color={"white"}
           >
             {isDesktop
               ? (<Flex

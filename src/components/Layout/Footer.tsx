@@ -6,7 +6,9 @@ import {useEffect, useState} from "react";
 import {Category} from "@/interfaces/Category";
 import axios from "axios";
 import {useRouter} from "next/router";
+interface ResponsePost{
 
+}
 
 export const Footer = (props: BoxProps) => {
   const router = useRouter()
@@ -40,7 +42,7 @@ export const Footer = (props: BoxProps) => {
   ]
 
   return (
-    <Box as="footer" role="contentinfo" px={{base: '8'}} mt={10} bg={"#cccccc"} {...props}>
+    <Box as="footer" role="contentinfo" px={{base: '8'}} mt={10} bg={"#252729"} {...props}>
       <Flex
         pt={{base: '12', md: '10'}}
         direction={{base: 'column', md: 'row'}}

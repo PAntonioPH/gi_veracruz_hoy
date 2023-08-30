@@ -53,7 +53,6 @@ export const LayoutSingle = (props: Props) => {
               {children}
             </Placeholder>
           </Flex>
-          <AnnouncementsRight/>
         </Flex>
         <Footer/>
       </Flex>

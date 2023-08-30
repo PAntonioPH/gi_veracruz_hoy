@@ -56,7 +56,7 @@ export const Slider = ({posts, handleClick, defaultImage}: Props) => {
                 style={{
                   fontSize: "1rem",
                   color: "#fff",
-                  backgroundColor: "#400d1c",
+                  backgroundColor: "#79181a",
                   opacity: 1,
                 }}
               >
