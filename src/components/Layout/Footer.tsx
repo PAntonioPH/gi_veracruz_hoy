@@ -135,6 +135,7 @@ export const Footer = (props: BoxProps) => {
                       boxShadow={"lg"}
                       onClick={() => router.push(`/category/${category}/post/${id}`)}
                       cursor={"pointer"}
+                      _hover={{bg: "#8c2d2d"}}
                     >
                       <Image
                         objectFit='cover'
