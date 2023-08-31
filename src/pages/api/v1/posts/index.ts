@@ -15,14 +15,36 @@ const posts = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case "GET":
       try {
-        const {category, post_type} = query
+        const {category, post_type, page} = query
 
         if (category && post_type) {
-          response = await conn.query(`SELECT p.*
-                                       FROM posts AS p
-                                                JOIN categories c on c.id = p.id_category
-                                       WHERE p.active = true
-                                           ${typeof category === "string" && parseInt(category) && category !== "0" ? ` AND p.id_category = '${category}' ` : `  AND c.url = '${category}' `} ${typeof post_type === "string" && post_type !== "0" ? ` AND p.id_post_type = '${post_type}' ` : ""};`)
+          if (typeof page !== "string" || !parseInt(page)) return res.status(500).json(message("Error, el parámetro page es requerido"))
+
+          const responsePosts = await conn.query(`SELECT p.*
+                                                  FROM (SELECT CEIL(ROW_NUMBER() OVER (ORDER BY p.id DESC) / 7) AS grupo,
+                                                               p.*
+                                                        FROM posts AS p
+                                                                 JOIN categories c on c.id = p.id_category
+                                                        WHERE p.active = true
+                                                            ${typeof category === "string" && parseInt(category) && category !== "0" ? ` AND c.url = '${category}' ` : `  AND c.url = '${category}' `} ${typeof post_type === "string" && post_type !== "0" ? ` AND p.id_post_type = '${post_type}' ` : ""}) as p
+                                                  WHERE p.grupo = ${parseInt(page) - 1};`)
+
+          if (responsePosts.rows.length > 0) responsePosts.rows.forEach((post: any) => delete post.grupo)
+
+          const responseCount = await conn.query(`SELECT COUNT(p.id) as count
+                                                  FROM posts AS p
+                                                           JOIN categories c on c.id = p.id_category
+                                                  WHERE p.active = true
+                                                    AND c.url = '${category}'
+                                                    AND p.id_post_type = '1';`)
+
+          response = {
+            posts: responsePosts.rows,
+            total: Math.ceil(responseCount.rows[0].count / 7),
+            currentPage: parseInt(page)
+          }
+
+          return res.status(200).json(message("Posts consultados", response))
         } else {
           response = await conn.query(`SELECT p.id, p.title, p.date_update, p.time_update, c.name as category
                                        FROM posts AS p
@@ -36,10 +58,11 @@ const posts = async (req: NextApiRequest, res: NextApiResponse) => {
               post.date_update = post.date_update.toISOString().split("T")[0]
             }
           }
-        }
 
-        return res.status(200).json(message("Posts consultados", response.rows))
+          return res.status(200).json(message("Posts consultados", response.rows))
+        }
       } catch (e) {
+        console.log(e)
         return res.status(500).json(message("Error, al consultar los posts"))
       }
     case "POST":
