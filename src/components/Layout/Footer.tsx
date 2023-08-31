@@ -1,4 +1,4 @@
-import {Box, BoxProps, Flex, SimpleGrid, Text} from '@chakra-ui/react'
+import {Box, BoxProps, Flex, SimpleGrid, Text, HStack, Image, VStack, Heading, Divider} from '@chakra-ui/react'
 import React, {useEffect, useState} from "react";
 import {LoadingPage} from "@/components/LoadingPage";
 import axios from "axios";
@@ -20,8 +20,6 @@ interface PropsCategories {
 
 export const Footer = (props: BoxProps) => {
   const router = useRouter()
-  const handleClick = async (url: string) => await router.push(url === "/" ? "/" : `/category/${url}`)
-
   const [data, setData] = useState<PropsCategories>({
     lastPosts: [],
     estado: []
@@ -51,7 +49,14 @@ export const Footer = (props: BoxProps) => {
             >
               <Flex
                 px={5}
+                direction={"column"}
               >
+                <Text
+                  color={"white"}
+                >
+                  ESTADO
+                </Text>
+                <Divider borderWidth="3px" mb={5} borderColor="#d13030"/>
                 {
                   data.estado.map(({id, img, title, content, category_name, category}) => (
                     <Flex
@@ -79,6 +84,16 @@ export const Footer = (props: BoxProps) => {
                           category_name
                         }
                       </Text>
+                      <Text
+                        color={"white"}
+                        px={5}
+                        py={5}
+                        textTransform="uppercase"
+                      >
+                        {
+                          title
+                        }
+                      </Text>
 
                       <Text
                         color={"white"}
@@ -97,36 +112,86 @@ export const Footer = (props: BoxProps) => {
                 }
               </Flex>
 
-
-              <Flex
-                p={5}>
+              <VStack
+                spacing={5}
+                pb={5}
+              >
+                <Flex
+                  direction={"column"}
+                >
+                  <Text
+                    color={"white"}
+                  >
+                    RECIENTES
+                  </Text>
+                  <Divider borderWidth="3px" mb={5} borderColor="#d13030"/>
+                </Flex>
                 {
-                  data.lastPosts.map(({id, img, title}) => (
-                    <Flex
+                  data.lastPosts.map(({id, img, title, category}) => (
+                    <HStack
                       key={id}
-                      bg={"white"}
-
+                      h={"50px"}
+                      borderRadius={"lg"}
+                      boxShadow={"lg"}
+                      onClick={() => router.push(`/category/${category}/post/${id}`)}
+                      cursor={"pointer"}
                     >
-                      <Text> {title}</Text>
-                    </Flex>
+                      <Image
+                        objectFit='cover'
+                        src={img}
+                        alt='Imagen'
+                        h={"full"}
+                      />
+                      <Heading
+                        color={"white"}
+                        size={"sm"}
+                        textTransform="uppercase"
+                      >
+                        {
+                          title.slice(0, 25)
+                        }
+                        {
+                          title.length > 25
+                          && "..."
+                        }
+                      </Heading>
+                    </HStack>
                   ))
                 }
-              </Flex>
+              </VStack>
 
-              <Flex>
+              <VStack
+                spacing={15}
+              >
+                <Text
+                  color={"white"}
+                >
+                  ÚLTIMAS TENDENCIAS
+                </Text>
+                <Divider borderWidth="3px" mb={5} borderColor="#d13030"/>
+
                 {
-                  data.lastPosts.map(({id, title}) => (
+                  data.lastPosts.map(({id, title, category}) => (
                     <Flex
                       key={id}
-                      bg={"purple"}
+                      px={5}
+                      onClick={() => router.push(`/category/${category}/post/${id}`)}
+                      cursor={"pointer"}
+                      borderLeft={"6px solid white"}
+                      _hover={{bg: "#8c2d2d"}}
                     >
-                      <Text>
-                        {title}
+
+                      <Text
+                        color={"white"}
+                      >
+                        {
+                          title
+                        }
                       </Text>
                     </Flex>
                   ))
                 }
-              </Flex>
+              </VStack>
 
             </SimpleGrid>
 
