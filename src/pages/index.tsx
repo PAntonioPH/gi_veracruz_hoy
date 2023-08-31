@@ -6,6 +6,7 @@ import {useRouter} from "next/router";
 import {Slider} from "@/components/Slider";
 import {Flex, Stack, Text, Heading, Center, Box, Button} from "@chakra-ui/react";
 import {Category} from "@/components/Home/Category";
+import last_posts from "@/pages/api/v1/last_posts";
 
 interface PropsPost {
   id: number,
@@ -27,6 +28,7 @@ interface PropsCategory {
 interface PropsCategories {
   categoriesPosts: PropsCategory
   lastPosts: PropsPost[]
+  news: PropsPost[]
 }
 
 const Index = () => {
@@ -39,7 +41,8 @@ const Index = () => {
       nacional: [],
       internacional: []
     },
-    lastPosts: []
+    lastPosts: [],
+    news: []
   })
   const [isLoading, setIsLoading] = useState(true);
 
@@ -87,6 +90,78 @@ const Index = () => {
               posts={data.categoriesPosts.internacional}
               name={"Internacional"}
             />
+
+            <Flex
+              direction={"column"}
+              mt={"10"}
+              bg={"#333946"}
+
+            >
+              <Box
+                bg={"#333946"}
+                w={"full"}
+                borderBottom={"20px solid white"}
+              >
+                <Heading
+                  p={2}
+                  w={"fit-content"}
+                  bg={"#d13030"}
+                  size={"sm"}
+                  color={"white"}
+                >
+                  NO TE PIERDAS...
+                </Heading>
+              </Box>
+
+              <Stack
+                spacing={5}
+                p={2}
+                direction={"row"}
+
+              >
+                {
+                  data.news.map(({id, title, img, category_name}) => (
+                    <Flex
+                      key={id}
+                      bgImage={img}
+                      bgSize={"cover"}
+                      borderRadius={"md"}
+                      flexDirection={"column"}
+                      justifyContent={"flex-end"}
+                      alignItems={"flex-start"}
+                      py={2}
+                      h={"300px"}
+                      w={"full"}
+                      boxShadow={"lg"}
+                      bgGradient={`linear-gradient(to-t, black, transparent), url("${img}")`}
+                    >
+                      <Text
+                        px={5}
+                        bg={"#bf3030"}
+                        color={"white"}
+                      >
+                        {
+                          category_name
+                        }
+                      </Text>
+                      <Heading
+                        size={"sm"}
+                        color={"white"}
+                        textAlign={"center"}
+                        ml={5}
+                        pt={5}
+                      >
+                        {
+                          title
+                        }
+                      </Heading>
+                    </Flex>
+                  ))
+                }
+              </Stack>
+
+            </Flex>
+
           </>)
       }
     </LayoutSingle>
