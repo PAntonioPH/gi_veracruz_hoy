@@ -59,10 +59,10 @@ export const LastPostCategory = ({post: {img, category_name, title, content, cat
 
         <Text>
           {
-            content.slice(85)
+            content.slice(0, 110)
           }
           {
-            content.length > 86
+            content.length > 111
             && "..."
           }
         </Text>

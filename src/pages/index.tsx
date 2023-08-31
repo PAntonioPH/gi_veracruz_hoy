@@ -120,7 +120,7 @@ const Index = () => {
 
               >
                 {
-                  data.news.map(({id, title, img, category_name}) => (
+                  data.news.map(({id, title, img, category_name, category}) => (
                     <Flex
                       key={id}
                       bgImage={img}
@@ -134,6 +134,9 @@ const Index = () => {
                       w={"full"}
                       boxShadow={"lg"}
                       bgGradient={`linear-gradient(to-t, black, transparent), url("${img}")`}
+                      cursor={"pointer"}
+                      onClick={() => router.push(`/category/${category}/post/${id}`)}
+
                     >
                       <Text
                         px={5}
