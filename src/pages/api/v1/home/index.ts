@@ -33,7 +33,8 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
 
   let response: any = {
     categoriesPosts: {},
-    lastPosts: []
+    lastPosts: [],
+    news: []
   };
 
   switch (method) {
@@ -91,8 +92,36 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
 
         response.lastPosts = lastPosts.rows;
 
+        const categoriesNews = [2, 3, 5]
+
+        let news: any = [];
+
+        for (let i = 0; i < categoriesNews.length; i++) {
+          const id = categoriesNews[i];
+
+          const categoryResponse = await conn.query(`SELECT p.id,
+                                                            p.title,
+                                                            p.img,
+                                                            p.content,
+                                                            c.url  as category,
+                                                            c.name as category_name
+                                                     FROM posts p
+                                                              JOIN categories c on p.id_category = c.id
+                                                     WHERE p.active = true
+                                                       AND p.id_post_type = 1
+                                                       AND p.id_category = '${id}'
+                                                     ORDER BY p.id DESC LIMIT 1;`)
+
+          if (categoryResponse.rows.length > 0) categoryResponse.rows.forEach((post: any) => post.content = decodeHTML5(post.content).replace(/<[^>]*>?/gm, ''));
+
+          news = [...news, ...categoryResponse.rows];
+        }
+
+        response.news = news;
+
         return res.status(200).json(message("Home consultado", response));
       } catch (e) {
+        console.log(e);
         return res.status(500).json(message("Error, al consultar el home"));
       }
     default:
