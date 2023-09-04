@@ -4,9 +4,8 @@ import axios from "axios";
 import {LoadingPage} from "@/components/LoadingPage";
 import {useRouter} from "next/router";
 import {Slider} from "@/components/Slider";
-import {Flex, Stack, Text, Heading, Center, Box, Button} from "@chakra-ui/react";
+import {Flex, Stack, Text, Heading, Box} from "@chakra-ui/react";
 import {Category} from "@/components/Home/Category";
-import last_posts from "@/pages/api/v1/last_posts";
 
 interface PropsPost {
   id: number,
@@ -95,7 +94,6 @@ const Index = () => {
               direction={"column"}
               mt={"10"}
               bg={"#333946"}
-
             >
               <Box
                 bg={"#333946"}
@@ -117,7 +115,6 @@ const Index = () => {
                 spacing={5}
                 p={2}
                 direction={"row"}
-
               >
                 {
                   data.news.map(({id, title, img, category_name, category}) => (
@@ -136,7 +133,6 @@ const Index = () => {
                       bgGradient={`linear-gradient(to-t, black, transparent), url("${img}")`}
                       cursor={"pointer"}
                       onClick={() => router.push(`/category/${category}/post/${id}`)}
-
                     >
                       <Text
                         px={5}
@@ -162,9 +158,7 @@ const Index = () => {
                   ))
                 }
               </Stack>
-
             </Flex>
-
           </>)
       }
     </LayoutSingle>

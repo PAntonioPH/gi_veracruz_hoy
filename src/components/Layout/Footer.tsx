@@ -181,21 +181,22 @@ export const Footer = (props: BoxProps) => {
                       borderLeft={"6px solid white"}
                       _hover={{bg: "#8c2d2d"}}
                     >
-
                       <Text
                         color={"white"}
                       >
                         {
-                          title
+                          title.slice(0, 25)
+                        }
+                        {
+                          title.length > 25
+                          && "..."
                         }
                       </Text>
                     </Flex>
                   ))
                 }
               </VStack>
-
             </SimpleGrid>
-
           </Box>)
       }
     </Box>

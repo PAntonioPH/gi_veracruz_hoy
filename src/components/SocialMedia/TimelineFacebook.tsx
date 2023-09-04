@@ -4,7 +4,7 @@ import {Avatar, Box, Heading, HStack, Text, VStack} from "@chakra-ui/react";
 import {LoadingPage} from "@/components/LoadingPage";
 import moment from "moment/moment";
 
-const accessToken = "EAAUCDvcq1loBADk6M1oCVjMu2fV4z0R3YXvOQ3VuOkdqSXDOSkWNqGbeZAHhZBZCvMW80PDO05V6QxgzYv0ZCD4CGt5zmsJWPwYmgScKD4NdDaLqvDyIk0WuiS2CawSXjZApg3hl8eMbZCSJk3B7qTFtjOt5WZAIbF39dWP2BbrKzSWSCUtOlSO"
+const accessToken = "EAALuZC2YGoFsBOZC05ws7ELhXk4hyBfJ8XCiPBdKstG5qG1XGzKBLSbEeta5uMRRJGlqIMoM9vrlnRc9Ka5bqDMiqF5MZAZAoPGZB2GuWVqjshwNHtZBxAOtzdV42ZCPenYZBe9iyizqOkoPFxrqBYVnEeMbaUcKtcQ86zqwjiTAItrdZBMaWzVFvsHmU6adaXmZBcHwZDZD"
 
 interface Post {
   id: string;
@@ -69,7 +69,7 @@ export const TimelineFacebook = () => {
               backgroundColor: "gray.100",
               textDecoration: "underline",
             }}
-            onClick={() => window.open("https://www.facebook.com/profile.php?id=100092837678912", "_blank")}
+            onClick={() => window.open("https://www.facebook.com/profile.php?id=100095189781749", "_blank")}
           >
             <Avatar
               size="md"

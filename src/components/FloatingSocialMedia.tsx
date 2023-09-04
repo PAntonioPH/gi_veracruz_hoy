@@ -7,7 +7,7 @@ export const FloatingSocialMedia = () => {
   return (
     <>
       <Button
-        onClick={() => window.open('https://www.facebook.com/LaOpiniondeHidalgo')}
+        onClick={() => window.open('https://www.facebook.com/profile.php?id=100095189781749')}
         colorScheme="facebook"
         size="sm"
         mb={2}
@@ -16,16 +16,16 @@ export const FloatingSocialMedia = () => {
         Veracruz Hoy
       </Button>
       <Button
-        onClick={() => window.open('https://twitter.com/LaopinionHidalg')}
+        onClick={() => window.open('https://twitter.com/VeracruzHoy_Mx')}
         colorScheme="twitter"
         size="sm"
         mb={2}
         leftIcon={<FontAwesomeIcon icon={faTwitter}/>}
       >
-        @LaopiniondelAltiplano
+        @VeracruzHoy_Mx
       </Button>
       <Button
-        onClick={() => window.open('https://www.instagram.com/laopinionhidalgo1/')}
+        onClick={() => window.open('https://www.instagram.com/veracruzhoyn/')}
         bg="#702459"
         _hover={{
           bg: '#702459'
@@ -35,7 +35,8 @@ export const FloatingSocialMedia = () => {
         mb={2}
         leftIcon={<FontAwesomeIcon icon={faInstagram}/>}
       >
-        @laopiniondelAltiplano
+
+        veracruzhoyn
       </Button>
     </>
   )

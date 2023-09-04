@@ -40,7 +40,7 @@ const Post = ({post}: Props) => {
         <meta property="og:description" content="El alma de la noticia"/>
         <meta property="og:image:width" content="600"/>
         <meta property="og:image:height" content="314"/>
-        <meta property="og:image" content={post.img ? post.img : "https://laopiniondelaltiplano.com/assets/icons/logo.png"}/>
+        <meta property="og:image" content={post.img ? post.img : "https://veracruzhoy.com/assets/icons/logo.png"}/>
         <meta property="og:image:type" content="image/jpeg"/>
         <meta property="og:image:type" content="image/png"/>
       </Head>

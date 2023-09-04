@@ -100,7 +100,7 @@ const News = async (req: NextApiRequest, res: NextApiResponse) => {
 
         response = await conn.query(query_insert(await filtrar_llaves(body, keys_filter), "news"))
 
-        const link = `https://laopiniondelaltiplano.com/news/${response.rows[0].id}`
+        const link = `https://veracruzhoy.com/news/${response.rows[0].id}`
         const content = `¡Ya puedes leer la edición del día! \n¡No te lo pierdas!`
 
         try {

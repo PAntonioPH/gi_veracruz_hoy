@@ -5,10 +5,10 @@ export const TimelineTwitter = () => {
     <Timeline
       dataSource={{
         sourceType: 'profile',
-        screenName: 'LaopinionHidalg',
+        screenName: 'VeracruzHoy_Mx',
       }}
       options={{
-        username: 'LaopinionHidalg',
+        username: 'VeracruzHoy_Mx',
         height: '500',
         width: "100%",
       }}

@@ -1,5 +1,5 @@
 User-agent:*
 Disallow:
-Sitemap:https://laopiniondelaltiplano.com
+Sitemap:https://veracruzhoy.com
 
 /
