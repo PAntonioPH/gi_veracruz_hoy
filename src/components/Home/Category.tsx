@@ -1,7 +1,9 @@
-import {Box, Flex, Heading, Stack, useBreakpointValue, useDisclosure} from "@chakra-ui/react";
+import {Box, Divider, Heading, Stack, useBreakpointValue} from "@chakra-ui/react";
 import React from "react";
 import {PostCategory} from "@/components/Home/PostCategory";
 import {LastPostCategory} from "@/components/Home/LastPostCategory";
+import {TimelineFacebook} from "@/components/SocialMedia/TimelineFacebook";
+import {TimelineTwitter} from "@/components/SocialMedia/TimelineTwitter";
 
 interface PropsPost {
   id: number,
@@ -12,7 +14,13 @@ interface PropsPost {
   category_name: string
 }
 
-export const Category = ({posts, name}: { posts: PropsPost[], name: string }) => {
+interface Props {
+  posts: PropsPost[],
+  name: string,
+  timeline?: boolean
+}
+
+export const Category = ({posts, name, timeline}: Props) => {
   const isDesktop = useBreakpointValue({base: false, md: true})
 
   return (<Box
@@ -39,33 +47,62 @@ export const Category = ({posts, name}: { posts: PropsPost[], name: string }) =>
       direction={{md: "row", base: "column"}}
       w={"100%"}
       spacing={10}
-      h={{md: "500px", base: "auto"}}
+      h={{md: timeline ? "1000px" : "500px", base: "auto"}}
     >
       {
-        !isDesktop && (<LastPostCategory post={posts[0]}/>)
+        (!isDesktop && !timeline) && (<LastPostCategory post={posts[0]}/>)
       }
 
       <Stack
-        w={{md: "25%", base: "100%"}}
+        w={{md: timeline ? "35%": "25%", base: "100%"}}
         spacing={5}
         p={2}
       >
-        <PostCategory post={posts[1]}/>
-        <PostCategory post={posts[2]}/>
+        {
+          timeline
+            ? (<>
+              <PostCategory post={posts[0]}/>
+              <PostCategory post={posts[1]}/>
+            </>)
+            : (<>
+              <PostCategory post={posts[1]}/>
+              <PostCategory post={posts[2]}/>
+            </>)
+        }
       </Stack>
 
       {
-        isDesktop && (<LastPostCategory post={posts[0]}/>)
+        (isDesktop && !timeline) && (<LastPostCategory post={posts[0]}/>)
       }
 
       <Stack
-        w={{md: "25%", base: "100%"}}
+        w={{md: timeline ? "35%": "25%", base: "100%"}}
         spacing={5}
         p={2}
       >
-        <PostCategory post={posts[3]}/>
-        <PostCategory post={posts[4]}/>
+        {
+          timeline
+            ? (<>
+              <PostCategory post={posts[2]}/>
+              <PostCategory post={posts[3]}/>
+            </>)
+            : (<>
+              <PostCategory post={posts[3]}/>
+              <PostCategory post={posts[4]}/>
+            </>)
+        }
       </Stack>
+
+      {
+        timeline
+        && (<Box
+          w={{md: "30%", base: "100%"}}
+        >
+          <TimelineFacebook/>
+          <Divider my={5}/>
+          <TimelineTwitter/>
+        </Box>)
+      }
     </Stack>
   </Box>)
 }
