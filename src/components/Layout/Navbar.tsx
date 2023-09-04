@@ -7,7 +7,6 @@ import {NavbarMobile} from "@/components/Layout/NavbarMobile";
 import React, {useEffect, useState} from "react";
 import {Category} from "@/interfaces/Category";
 import {NavbarItem} from "@/components/Layout/NavbarItem";
-import {DateWeather} from "@/components/DateWeather";
 import Bubble from "@/components/Bubble";
 
 export const Navbar = () => {
@@ -53,13 +52,13 @@ export const Navbar = () => {
           >
             {isDesktop
               ? (<Flex
-                justify="space-between"
+                justifyContent={"center"}
                 flex="1"
                 alignItems="center"
               >
                 <SimpleGrid
                   columns={pages.length}
-                  spacing={10}
+                  spacing={5}
                 >
                   {pages.map((page, index) => (
                     <NavbarItem
