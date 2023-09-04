@@ -19,7 +19,6 @@ interface Props {
 export const Slider = ({posts, handleClick, defaultImage}: Props) => {
   return (
     <Box
-      px={{base: 0, md: 20}}
       _hover={{
         cursor: "pointer",
       }}

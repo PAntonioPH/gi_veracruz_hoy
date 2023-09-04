@@ -51,12 +51,10 @@ const Category = () => {
                     onClick={() => handleClick(id)}
                     direction={{base: 'row', sm: 'column'}}
                     cursor={"pointer"}
-                    boxShadow={"lg"}
                     bg={"white"}
                     borderRadius={"md"}
                     my={{base: 5, md: 0}}
                     justifyContent={"space-between"}
-                    mx={40}
                   >
                     <Flex
                       direction={"column"}

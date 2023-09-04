@@ -88,6 +88,7 @@ const Index = () => {
             <Category
               posts={data.categoriesPosts.internacional}
               name={"Internacional"}
+              timeline
             />
 
             <Flex
