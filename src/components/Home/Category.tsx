@@ -1,4 +1,4 @@
-import {Box, Flex, Heading, Stack} from "@chakra-ui/react";
+import {Box, Flex, Heading, Stack, useBreakpointValue, useDisclosure} from "@chakra-ui/react";
 import React from "react";
 import {PostCategory} from "@/components/Home/PostCategory";
 import {LastPostCategory} from "@/components/Home/LastPostCategory";
@@ -13,7 +13,10 @@ interface PropsPost {
 }
 
 export const Category = ({posts, name}: { posts: PropsPost[], name: string }) => {
-  return (<Box>
+  const isDesktop = useBreakpointValue({base: false, md: true})
+
+  return (<Box
+  >
     <Box
       bg={"#333946"}
       w={"full"}
@@ -33,13 +36,17 @@ export const Category = ({posts, name}: { posts: PropsPost[], name: string }) =>
       </Heading>
     </Box>
     <Stack
-      direction={"row"}
+      direction={{md: "row", base: "column"}}
       w={"100%"}
       spacing={10}
-      h={"500px"}
+      h={{md: "500px", base: "auto"}}
     >
+      {
+        !isDesktop && (<LastPostCategory post={posts[0]}/>)
+      }
+
       <Stack
-        w={"25%"}
+        w={{md: "25%", base: "100%"}}
         spacing={5}
         p={2}
       >
@@ -47,10 +54,12 @@ export const Category = ({posts, name}: { posts: PropsPost[], name: string }) =>
         <PostCategory post={posts[2]}/>
       </Stack>
 
-      <LastPostCategory post={posts[0]}/>
+      {
+        isDesktop && (<LastPostCategory post={posts[0]}/>)
+      }
 
       <Stack
-        w={"25%"}
+        w={{md: "25%", base: "100%"}}
         spacing={5}
         p={2}
       >

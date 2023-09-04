@@ -1,4 +1,4 @@
-import {Box, BoxProps, Flex, SimpleGrid, Text, HStack, Image, VStack, Heading, Divider} from '@chakra-ui/react'
+import {Box, BoxProps, Flex, SimpleGrid, Text, HStack, Image, VStack, Heading, Divider,} from '@chakra-ui/react'
 import React, {useEffect, useState} from "react";
 import {LoadingPage} from "@/components/LoadingPage";
 import axios from "axios";
@@ -44,8 +44,9 @@ export const Footer = (props: BoxProps) => {
           ? (<LoadingPage/>)
           : (<Box as="footer" role="contentinfo" px={{base: '8'}} mt={10} bg={"#252729"} {...props} >
             <SimpleGrid
-              columns={3}
+              columns={{md: 3, base: 1}}
               py={10}
+              spacing={5}
             >
               <Flex
                 px={5}
@@ -114,7 +115,8 @@ export const Footer = (props: BoxProps) => {
 
               <VStack
                 spacing={5}
-                pb={5}
+                py={5}
+                borderTop={{base: "3px solid white", md: "none"}}
               >
                 <Flex
                   direction={"column"}
@@ -126,43 +128,50 @@ export const Footer = (props: BoxProps) => {
                   </Text>
                   <Divider borderWidth="3px" mb={5} borderColor="#d13030"/>
                 </Flex>
-                {
-                  data.lastPosts.map(({id, img, title, category}) => (
-                    <HStack
-                      key={id}
-                      h={"50px"}
-                      borderRadius={"lg"}
-                      boxShadow={"lg"}
-                      onClick={() => router.push(`/category/${category}/post/${id}`)}
-                      cursor={"pointer"}
-                      _hover={{bg: "#8c2d2d"}}
-                    >
-                      <Image
-                        objectFit='cover'
-                        src={img}
-                        alt='Imagen'
-                        h={"full"}
-                      />
-                      <Heading
-                        color={"white"}
-                        size={"sm"}
-                        textTransform="uppercase"
+                <VStack
+                  spacing={2}
+                  w={"full"}
+                >
+                  {
+                    data.lastPosts.map(({id, img, title, category}) => (
+                      <HStack
+                        key={id}
+                        borderRadius={"lg"}
+                        boxShadow={"lg"}
+                        onClick={() => router.push(`/category/${category}/post/${id}`)}
+                        cursor={"pointer"}
+                        _hover={{bg: "#8c2d2d"}}
+                        w={"full"}
                       >
-                        {
-                          title.slice(0, 25)
-                        }
-                        {
-                          title.length > 25
-                          && "..."
-                        }
-                      </Heading>
-                    </HStack>
-                  ))
-                }
+                        <Image
+                          objectFit='cover'
+                          src={img}
+                          h={"50px"}
+                          alt='Imagen'
+                        />
+                        <Heading
+                          color={"white"}
+                          size={"sm"}
+                          textTransform="uppercase"
+                        >
+                          {
+                            title.slice(0, 25)
+                          }
+                          {
+                            title.length > 25
+                            && "..."
+                          }
+                        </Heading>
+                      </HStack>
+                    ))
+                  }
+                </VStack>
               </VStack>
 
               <VStack
                 spacing={15}
+                py={5}
+                borderTop={{base: "3px solid white", md: "none"}}
               >
                 <Text
                   color={"white"}
@@ -171,30 +180,36 @@ export const Footer = (props: BoxProps) => {
                 </Text>
                 <Divider borderWidth="3px" mb={5} borderColor="#d13030"/>
 
-                {
-                  data.lastPosts.map(({id, title, category}) => (
-                    <Flex
-                      key={id}
-                      px={5}
-                      onClick={() => router.push(`/category/${category}/post/${id}`)}
-                      cursor={"pointer"}
-                      borderLeft={"6px solid white"}
-                      _hover={{bg: "#8c2d2d"}}
-                    >
-                      <Text
-                        color={"white"}
+                <VStack
+                  spacing={2}
+                  w={"full"}
+                >
+                  {
+                    data.lastPosts.map(({id, title, category}) => (
+                      <Flex
+                        key={id}
+                        px={5}
+                        onClick={() => router.push(`/category/${category}/post/${id}`)}
+                        cursor={"pointer"}
+                        borderLeft={"6px solid white"}
+                        _hover={{bg: "#8c2d2d"}}
+                        w={"100%"}
                       >
-                        {
-                          title.slice(0, 25)
-                        }
-                        {
-                          title.length > 25
-                          && "..."
-                        }
-                      </Text>
-                    </Flex>
-                  ))
-                }
+                        <Text
+                          color={"white"}
+                        >
+                          {
+                            title.slice(0, 25)
+                          }
+                          {
+                            title.length > 25
+                            && "..."
+                          }
+                        </Text>
+                      </Flex>
+                    ))
+                  }
+                </VStack>
               </VStack>
             </SimpleGrid>
           </Box>)

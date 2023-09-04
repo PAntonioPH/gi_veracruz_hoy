@@ -93,12 +93,11 @@ const Index = () => {
             <Flex
               direction={"column"}
               mt={"10"}
-              bg={"#333946"}
             >
               <Box
                 bg={"#333946"}
                 w={"full"}
-                borderBottom={"20px solid white"}
+                mb={5}
               >
                 <Heading
                   p={2}
@@ -114,7 +113,8 @@ const Index = () => {
               <Stack
                 spacing={5}
                 p={2}
-                direction={"row"}
+                direction={{md: "row", base: "column"}}
+                bg={"#333946"}
               >
                 {
                   data.news.map(({id, title, img, category_name, category}) => (

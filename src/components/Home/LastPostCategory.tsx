@@ -15,7 +15,7 @@ export const LastPostCategory = ({post: {img, category_name, title, content, cat
   const router = useRouter()
 
   return (<Flex
-    w={"50%"}
+    w={{md: "50%", base: "100%"}}
     direction={"column"}
     h={"full"}
     cursor={"pointer"}
@@ -25,7 +25,7 @@ export const LastPostCategory = ({post: {img, category_name, title, content, cat
       bgImage={img}
       bgSize={"cover"}
       borderRadius={"md"}
-      h={"full"}
+      h={{md: "full", base:"200px"}}
       flexDirection={"column"}
       justifyContent={"space-between"}
       alignItems={"flex-start"}

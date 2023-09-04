@@ -25,7 +25,7 @@ export const PostCategory = ({post: {img, category_name, category, title, id}}: 
       bgImage={img}
       bgSize={"cover"}
       borderRadius={"md"}
-      h={"80%"}
+      h={{base: "200px", md: "80%"}}
       flexDirection={"column"}
       justifyContent={"space-between"}
       alignItems={"flex-start"}
@@ -46,7 +46,7 @@ export const PostCategory = ({post: {img, category_name, category, title, id}}: 
       color={"black"}
       pt={5}
       textAlign={"center"}
-      h={"20%"}
+      h={{base: "auto", md: "20%"}}
     >
       {
         title
