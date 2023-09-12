@@ -1,12 +1,13 @@
 import {useRouter} from "next/router";
 import {LayoutSingle} from "@/components/Layout/LayoutSingle";
-import {Text, Heading, SimpleGrid, Image, Box, Flex, Button, Center} from "@chakra-ui/react";
+import {Text, Heading, SimpleGrid, Image, Box, Flex, Button, Center, HStack} from "@chakra-ui/react";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Post} from "@/interfaces/Post";
 import {LoadingPage} from "@/components/LoadingPage";
 import {Pagination} from "@/components/Pagination";
 import moment from "moment";
+import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator,} from '@chakra-ui/react'
 
 
 const Category = () => {
@@ -41,6 +42,52 @@ const Category = () => {
         loading
           ? (<LoadingPage/>)
           : (<Box>
+            <HStack>
+              <Box
+                w={"10%"}
+                mb={5}
+                mr={5}
+              >
+                <Heading
+                  textTransform={"capitalize"}
+                  bg={"#d13030"}
+                  color={"white"}
+                  size={"lg"}
+                >
+                  {
+                    category
+                  }
+                </Heading>
+              </Box>
+              <Box>
+                <Breadcrumb
+                  separator={'>'}
+                  color={"#aaaabd"}
+                >
+                  <BreadcrumbItem>
+                    <BreadcrumbLink
+                      href={'/'}
+                      color={"#aaaabd"}
+                    >
+                      Inicio
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink
+                      textTransform={"capitalize"}
+                      _hover={{
+                        textDecoration: "none",
+                        cursor: "default"
+                      }}
+                      color={"#aaaabd"}
+                    >
+                      Category: {category}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                </Breadcrumb>
+              </Box>
+            </HStack>
+
             <SimpleGrid
               spacing={10}
               columns={{base: 1, md: 2}}
@@ -102,7 +149,7 @@ const Category = () => {
                           {moment(date_update.split("T")[0]).format("MMMM D YYYY")}
                         </Text>
                         <Text
-                        pb={5}
+                          pb={5}
                         >
                           {
                             content.slice(0, 110)
@@ -118,7 +165,7 @@ const Category = () => {
                       <Button
                         variant={"outline"}
                         _hover={{
-                          bg:"#d13030"
+                          bg: "#d13030"
                         }}
                         boxShadow={"lg"}
                       >
