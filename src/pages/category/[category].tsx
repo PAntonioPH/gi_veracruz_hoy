@@ -44,7 +44,7 @@ const Category = () => {
           : (<Box>
             <HStack>
               <Box
-                w={"10%"}
+                w={"18%"}
                 mb={5}
                 mr={5}
               >
