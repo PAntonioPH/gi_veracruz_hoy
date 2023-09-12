@@ -18,7 +18,7 @@ export const NavbarItem = ({handleClickNav, category: {children, id, name, url}}
         children.length <= 0
           ? (<Button
             variant="link"
-            bg={router.query.category === url || router.pathname === url ? "red" : "none"}
+            bg={router.query.category === url || router.pathname === url ? "#d13030" : "none"}
             h={"50px"}
             borderRadius={"none"}
             colorScheme={"blackAlpha.500"}

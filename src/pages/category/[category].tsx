@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import {LayoutSingle} from "@/components/Layout/LayoutSingle";
-import {Text, Heading, SimpleGrid, Image, Box, Flex, Button} from "@chakra-ui/react";
+import {Text, Heading, SimpleGrid, Image, Box, Flex, Button, Center} from "@chakra-ui/react";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Post} from "@/interfaces/Post";
@@ -27,6 +27,7 @@ const Category = () => {
       .then((res) => {
         if (res.data.response.posts.length > 0) setData(res.data.response.posts.sort((a: Post, b: Post) => b.id - a.id))
         setTotalPages(res.data.response.total)
+        console.log(res.data.response)
       })
       .finally(() => setLoading(false))
   }, [category, currentPage]);
@@ -45,69 +46,138 @@ const Category = () => {
               columns={{base: 1, md: 2}}
             >
               {
-                data.map(({id, title, img, date_update, content}) => (
+                data.map(({id, title, img, date_update, content, category}) => (
                   <Flex
                     key={id}
                     onClick={() => handleClick(id)}
-                    direction={{base: 'row', sm: 'column'}}
+                    direction={"column"}
                     cursor={"pointer"}
                     bg={"white"}
                     borderRadius={"md"}
-                    my={{base: 5, md: 0}}
                     justifyContent={"space-between"}
+                    pb={5}
+                    borderBottom={"3px solid black"}
                   >
                     <Flex
                       direction={"column"}
-                      alignItems={"center"}
+                      bgImage={img}
+                      bgSize={"cover"}
+                      h={"200px"}
+                      flexDirection={"column"}
+                      justifyContent={"space-between"}
+                      alignItems={"flex-start"}
                     >
-                      <Heading
-                        size={"md"}
-                        pb={2}
-                        mt={2}
-                        mx={2}
-                      >
-                        {
-                          title.slice(0, 70)
-                        }
-                        {
-                          title.length > 70
-                          && "..."
-                        }
-                      </Heading>
-                      <Text
-                        pb={5}
-                        as={"em"}
-                      >
-                        {moment(date_update.split("T")[0]).format("DD/MM/YYYY")}
-                      </Text>
-                      <Image
-                        objectFit='cover'
-                        h={"300px"}
-                        w={"300px"}
-                        src={img && img != "" ? img : '/assets/images/placeholderImg.jpg'}
-                        alt='Imagen'
-                      />
                       <Text
                         px={5}
-                        py={5}
-                        textAlign={"justify"}
+                        bg={"#d13030"}
+                        color={"white"}
                       >
                         {
-                          content.slice(0, 130)
-                        }
-                        {
-                          content.length > 131
-                          && "..."
+                          category
                         }
                       </Text>
+                    </Flex>
+                    <Center>
+                      <Box
+                        position={"relative"}
+                        bg={"white"}
+                        bottom={"40px"}
+                        w={"90%"}
+                        px={5}
+                        boxShadow={"lg"}
+                      >
+                        <Heading
+                          size={"sm"}
+                          color={"black"}
+                          m={5}
+                          textAlign={"center"}
+                        >
+                          {title}
+                        </Heading>
+                        <Text
+                          mb={5}
+                          as={"em"}
+                          color={"#aaaaaa"}
+                        >
+                          {moment(date_update.split("T")[0]).format("MMMM D YYYY")}
+                        </Text>
+                        <Text
+                        pb={5}
+                        >
+                          {
+                            content.slice(0, 110)
+                          }
+                          {
+                            content.length > 111
+                            && "..."
+                          }
+                        </Text>
+                      </Box>
+                    </Center>
+                    <Center>
                       <Button
                         variant={"outline"}
-                        colorScheme={"gray"}
-                        mb={5}
+                        _hover={{
+                          bg:"#d13030"
+                        }}
+                        boxShadow={"lg"}
                       >
                         Leer más
                       </Button>
-                    </Flex>
+                    </Center>
+
+                    {/*<Flex*/}
+                    {/*  direction={"column"}*/}
+                    {/*  alignItems={"center"}*/}
+                    {/*>*/}
+                    {/*  <Heading*/}
+                    {/*    size={"md"}*/}
+                    {/*    pb={2}*/}
+                    {/*    mt={2}*/}
+                    {/*    mx={2}*/}
+                    {/*  >*/}
+                    {/*    {*/}
+                    {/*      title.slice(0, 70)*/}
+                    {/*    }*/}
+                    {/*    {*/}
+                    {/*      title.length > 70*/}
+                    {/*      && "..."*/}
+                    {/*    }*/}
+                    {/*  </Heading>*/}
+                    {/*  <Text*/}
+                    {/*    pb={5}*/}
+                    {/*    as={"em"}*/}
+                    {/*  >*/}
+                    {/*    {moment(date_update.split("T")[0]).format("DD/MM/YYYY")}*/}
+                    {/*  </Text>*/}
+                    {/*  <Image*/}
+                    {/*    objectFit='cover'*/}
+                    {/*    h={"300px"}*/}
+                    {/*    w={"300px"}*/}
+                    {/*    src={img && img != "" ? img : '/assets/images/placeholderImg.jpg'}*/}
+                    {/*    alt='Imagen'*/}
+                    {/*  />*/}
+                    {/*  <Text*/}
+                    {/*    px={5}*/}
+                    {/*    py={5}*/}
+                    {/*    textAlign={"justify"}*/}
+                    {/*  >*/}
+                    {/*    {*/}
+                    {/*      content.slice(0, 130)*/}
+                    {/*    }*/}
+                    {/*    {*/}
+                    {/*      content.length > 131*/}
+                    {/*      && "..."*/}
+                    {/*    }*/}
+                    {/*  </Text>*/}
+                    {/*  <Button*/}
+                    {/*    variant={"outline"}*/}
+                    {/*    colorScheme={"gray"}*/}
+                    {/*    mb={5}*/}
+                    {/*  >*/}
+                    {/*    Leer más*/}
+                    {/*  </Button>*/}
+                    {/*</Flex>*/}
 
                   </Flex>
                 ))

@@ -47,7 +47,7 @@ export const LayoutSingle = (props: Props) => {
             direction="column"
             flex="1"
             w={{base: "100%", md: "70%"}}
-            mx={40}
+            mx={{base:0, md:"40"}}
             {...props}
           >
             <Placeholder bg="bg-accent">
