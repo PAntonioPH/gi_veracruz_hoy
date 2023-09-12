@@ -20,20 +20,22 @@ const posts = async (req: NextApiRequest, res: NextApiResponse) => {
         if (category && post_type) {
           if (typeof page !== "string" || !parseInt(page)) return res.status(500).json(message("Error, el parámetro page es requerido"))
 
-          const responsePosts = await conn.query(`SELECT p.*
+          const responsePosts = await conn.query(`SELECT p.*, c.name as category
                                                   FROM (SELECT CEIL(ROW_NUMBER() OVER (ORDER BY p.id DESC) / 7) AS grupo,
                                                                p.*
                                                         FROM posts AS p
                                                                  JOIN categories c on c.id = p.id_category
                                                         WHERE p.active = true
                                                             ${typeof category === "string" && parseInt(category) && category !== "0" ? ` AND c.url = '${category}' ` : `  AND c.url = '${category}' `} ${typeof post_type === "string" && post_type !== "0" ? ` AND p.id_post_type = '${post_type}' ` : ""}) as p
+                                                           JOIN categories c on c.id = p.id_category
                                                   WHERE p.grupo = ${parseInt(page) - 1};`)
 
           if (responsePosts.rows.length > 0) responsePosts.rows.forEach((post: any) => delete post.grupo)
 
           const responseCount = await conn.query(`SELECT COUNT(p.id) as count
                                                   FROM posts AS p
-                                                           JOIN categories c on c.id = p.id_category
+                                                      JOIN categories c
+                                                  on c.id = p.id_category
                                                   WHERE p.active = true
                                                     AND c.url = '${category}'
                                                     AND p.id_post_type = '1';`)
