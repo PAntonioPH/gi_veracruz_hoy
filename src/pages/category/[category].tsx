@@ -42,24 +42,27 @@ const Category = () => {
         loading
           ? (<LoadingPage/>)
           : (<Box>
-            <HStack>
+            <Flex
+              alignItems={"center"}
+                mb={5}
+            >
               <Box
                 w={"18%"}
-                mb={5}
                 mr={5}
               >
                 <Heading
                   textTransform={"capitalize"}
                   bg={"#d13030"}
                   color={"white"}
-                  size={"lg"}
+                  size={"sm"}
+                  py={2}
+                  textAlign={"center"}
                 >
                   {
                     category
                   }
                 </Heading>
               </Box>
-              <Box>
                 <Breadcrumb
                   separator={'>'}
                   color={"#aaaabd"}
@@ -85,8 +88,7 @@ const Category = () => {
                     </BreadcrumbLink>
                   </BreadcrumbItem>
                 </Breadcrumb>
-              </Box>
-            </HStack>
+            </Flex>
 
             <SimpleGrid
               spacing={10}
