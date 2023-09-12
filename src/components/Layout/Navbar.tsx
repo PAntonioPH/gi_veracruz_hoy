@@ -47,8 +47,6 @@ export const Navbar = () => {
           <HStack
             spacing='10'
             justify='space-between'
-            px={{ base: '5', lg: '10' }}
-            py={{ base: '5', lg: '5' }}
             bg={'#19232d'}
             color={'white'}
           >

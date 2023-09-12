@@ -18,9 +18,14 @@ export const NavbarItem = ({handleClickNav, category: {children, id, name, url}}
         children.length <= 0
           ? (<Button
             variant="link"
-            textDecoration={router.query.category === url || router.pathname === url ? "underline" : "none"}
+            bg={router.query.category === url || router.pathname === url ? "red" : "none"}
+            h={"50px"}
+            borderRadius={"none"}
             colorScheme={"blackAlpha.500"}
             onClick={() => handleClickNav(name === "Inicio" ? "/" : `/${url}`)}
+            _hover={{
+              textDecoration: "none"
+            }}
           >
             {name}
           </Button>)
@@ -28,7 +33,7 @@ export const NavbarItem = ({handleClickNav, category: {children, id, name, url}}
             <MenuButton
               as={Button}
               rightIcon={children.length > 0 ? <FontAwesomeIcon icon={faChevronDown}/> : undefined}
-              textDecoration={router.query.category === url || router.pathname === url ? "underline" : "none"}
+              bg={router.query.category === url || router.pathname === url ? "#d13030" : "none"}
               variant="link"
               colorScheme={"blackAlpha.500"}
             >
@@ -40,7 +45,7 @@ export const NavbarItem = ({handleClickNav, category: {children, id, name, url}}
                   as={Button}
                   key={id}
                   variant={"link"}
-                  textDecoration={router.query.category === url || router.pathname === url ? "underline" : "none"}
+                  bg={router.query.category === url || router.pathname === url ? "#d13030" : "none"}
                   onClick={() => handleClickNav(name === "Inicio" ? "/" : `/${url}`)}
                   _hover={{
                     cursor: "pointer",
