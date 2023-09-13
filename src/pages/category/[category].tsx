@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import {LayoutSingle} from "@/components/Layout/LayoutSingle";
-import {Text, Heading, SimpleGrid, Image, Box, Flex, Button, Center, HStack} from "@chakra-ui/react";
+import {Text, Heading, SimpleGrid, Image, Box, Flex, Button, Center} from "@chakra-ui/react";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Post} from "@/interfaces/Post";
