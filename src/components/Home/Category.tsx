@@ -25,7 +25,7 @@ export const Category = ({posts, name, timeline}: Props) => {
 
   return (<>
     {
-      posts && posts.length > 0
+      posts && posts.length >= 5
       && (<Box
       >
         <Box
