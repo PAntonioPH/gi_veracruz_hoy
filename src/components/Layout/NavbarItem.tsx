@@ -39,7 +39,10 @@ export const NavbarItem = ({handleClickNav, category: {children, id, name, url}}
             >
               {name}
             </MenuButton>
-            <MenuList>
+            <MenuList
+              bg={"#19232d"}
+
+            >
               {children.map(({name, id, url}) => (
                 <MenuItem
                   as={Button}
@@ -49,7 +52,7 @@ export const NavbarItem = ({handleClickNav, category: {children, id, name, url}}
                   onClick={() => handleClickNav(name === "Inicio" ? "/" : `/${url}`)}
                   _hover={{
                     cursor: "pointer",
-                    backgroundColor: "#B3D3F4"
+                    backgroundColor: "#d13030"
                   }}
                 >
                   {name}
