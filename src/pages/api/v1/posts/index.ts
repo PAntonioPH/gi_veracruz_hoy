@@ -96,7 +96,7 @@ const posts = async (req: NextApiRequest, res: NextApiResponse) => {
                                            FROM categories
                                            WHERE id = '${body.id_category}';`)
 
-        const link = `https://veracruzhoy.com/category/${category.rows[0].url}/post/${response.rows[0].id}`
+        const link = `https://veracruzhoy.com.mx/category/${category.rows[0].url}/post/${response.rows[0].id}`
 
         try {
           await postTwitter(body.title_rrss, link)

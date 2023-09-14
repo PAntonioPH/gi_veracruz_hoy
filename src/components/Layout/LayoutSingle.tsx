@@ -26,13 +26,13 @@ export const LayoutSingle = (props: Props) => {
 
         <meta property="og:title" content="Veracruz Hoy"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:url" content="https://veracruzhoy.com"/>
-        <meta property="og:image" content="https://veracruzhoy.com/assets/icons/logoMeta.jpg"/>
-        <meta property="og:image/png" content="https://veracruzhoy.com/assets/icons/logo.png"/>
+        <meta property="og:url" content="https://veracruzhoy.com.mx"/>
+        <meta property="og:image" content="https://veracruzhoy.com.mx/assets/icons/logoMeta.jpg"/>
+        <meta property="og:image/png" content="https://veracruzhoy.com.mx/assets/icons/logo.png"/>
 
         <meta property="twitter:title" content="Veracruz Hoy"/>
-        <meta property="twitter:site" content="https://veracruzhoy.com"/>
-        <meta property="twitter:image" content="https://veracruzhoy.com/assets/icons/logo.png"/>
+        <meta property="twitter:site" content="https://veracruzhoy.com.mx"/>
+        <meta property="twitter:image" content="https://veracruzhoy.com.mx/assets/icons/logo.png"/>
       </Head>
 
       <Flex direction="column" flex="1">

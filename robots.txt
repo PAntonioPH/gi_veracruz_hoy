@@ -1,5 +1,3 @@
 User-agent:*
 Disallow:
-Sitemap:https://veracruzhoy.com
-
-/
+Sitemap:https://veracruzhoy.com.mx/
