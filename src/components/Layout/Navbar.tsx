@@ -1,30 +1,37 @@
-import { Box, Flex, HStack, IconButton, SimpleGrid, Image, useBreakpointValue, useDisclosure, Center } from '@chakra-ui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { useRouter } from 'next/router';
+import {Box, Flex, HStack, IconButton, SimpleGrid, Image, useBreakpointValue, useDisclosure} from '@chakra-ui/react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faBars} from '@fortawesome/free-solid-svg-icons';
+import {useRouter} from 'next/router';
 import axios from 'axios';
-import { NavbarMobile } from '@/components/Layout/NavbarMobile';
-import React, { useEffect, useState } from 'react';
-import { Category } from '@/interfaces/Category';
-import { NavbarItem } from '@/components/Layout/NavbarItem';
+import {NavbarMobile} from '@/components/Layout/NavbarMobile';
+import React, {useEffect, useState} from 'react';
+import {Category} from '@/interfaces/Category';
+import {NavbarItem} from '@/components/Layout/NavbarItem';
 import Bubble from '@/components/Bubble';
+import {grupoHoy} from "@/data/grupoHoy";
 
 export const Navbar = () => {
   const router = useRouter();
-  const isDesktop = useBreakpointValue({ base: false, lg: true });
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const isDesktop = useBreakpointValue({base: false, lg: true});
+  const {isOpen, onOpen, onClose} = useDisclosure();
   const [pages, setPages] = useState<Category[]>([]);
 
-  const handleClickNav = async (url: string) => await router.push(url === '/' ? '/' : `/category${url}`);
+  const handleClickNav = async (url: string) => {
+    if (url.includes('http')) {
+      window.open(url.replace(/^\/+/g, ''), '_blank');
+    } else {
+      await router.push(url === '/' ? '/' : `/category${url}`);
+    }
+  }
 
   useEffect(() => {
     axios
       .get('/api/v1/categories', {
-        params: { navbar: true },
-        headers: { Authorization: `${process.env.NEXT_PUBLIC_TOKEN_WEB}` },
+        params: {navbar: true},
+        headers: {Authorization: `${process.env.NEXT_PUBLIC_TOKEN_WEB}`},
       })
       .then((res) => {
-        if (res.data.response.length > 0) setPages(res.data.response);
+        if (res.data.response.length > 0) setPages([...res.data.response, grupoHoy]);
       });
   }, []);
 
@@ -72,12 +79,12 @@ export const Navbar = () => {
             ) : (
               <IconButton
                 variant='ghost'
-                icon={<FontAwesomeIcon icon={faBars} />}
+                icon={<FontAwesomeIcon icon={faBars}/>}
                 aria-label='Open Menu'
                 onClick={onOpen}
               />
             )}
-            <Bubble />
+            <Bubble/>
           </HStack>
         </Box>
       </Box>
