@@ -5,7 +5,7 @@ import {filtrar_llaves, message, validar_llaves, validate_cookie} from "@/utils/
 import {uploadFile} from "@/utils/s3";
 import {postTwitter} from "@/utils/twitter";
 import {postFacebook} from "@/utils/facebook";
-import {encodeHTML5} from "entities";
+import {decodeHTML5, encodeHTML5} from "entities";
 
 const posts = async (req: NextApiRequest, res: NextApiResponse) => {
   const {method, body, query} = req
@@ -30,7 +30,10 @@ const posts = async (req: NextApiRequest, res: NextApiResponse) => {
                                                            JOIN categories c on c.id = p.id_category
                                                   WHERE p.grupo = ${parseInt(page) - 1};`)
 
-          if (responsePosts.rows.length > 0) responsePosts.rows.forEach((post: any) => delete post.grupo)
+          if (responsePosts.rows.length > 0) {
+            responsePosts.rows.forEach((post: any) => delete post.grupo)
+            responsePosts.rows.forEach((post: any) => post.content = decodeHTML5(post.content).replace(/<[^>]*>?/gm, ''))
+          }
 
           const responseCount = await conn.query(`SELECT COUNT(p.id) as count
                                                   FROM posts AS p

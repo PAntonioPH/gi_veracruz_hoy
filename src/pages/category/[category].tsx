@@ -28,7 +28,6 @@ const Category = () => {
       .then((res) => {
         if (res.data.response.posts.length > 0) setData(res.data.response.posts.sort((a: Post, b: Post) => b.id - a.id))
         setTotalPages(res.data.response.total)
-        console.log(res.data.response)
       })
       .finally(() => setLoading(false))
   }, [category, currentPage]);
