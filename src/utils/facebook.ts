@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const accessToken = "EAACcBlHKjIMBO3UfHSgbSGxDvQ4tDyxg5z3hE9xWnCoonn0plcIZAFJtoQfqWu8YwyFe4DF6V1fHQ6OqolrtBBFbVZAvtST0dJjszS49cXEnCGvPfIL9FGI2U7FWKKsOZAmVKRsN7YAXbJ9hYwSNnj4m3WC5Wj0O3rGHDzwkgBKLCBmPTm7ZC8TMc1g5nifJpQZDZD"
+const accessToken = "EAACcBlHKjIMBO1DBsS4bSCVZAYqzZAMuZC4e7rkglwurZBO3KaFZA7a51C77OeV1RcyCHl2pZB9BsCGNU28DH35aOL5tpZBOEuoUGaK4w8KnEFpscd4IMxv1qa2KLOn3hXONa0mX7JLisNN75DrZB51VSFAQ54ZAzdxTwZCMPDQzIMiZAfSs5qGfktw8HSRFhAuZAKU1lwZDZD"
 
 export const postFacebook = async (message: string, link: string) => {
   return new Promise(async (resolve, reject) => {
