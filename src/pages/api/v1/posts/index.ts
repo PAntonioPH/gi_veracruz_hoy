@@ -101,11 +101,11 @@ const posts = async (req: NextApiRequest, res: NextApiResponse) => {
 
         const link = `https://veracruzhoy.com.mx/category/${category.rows[0].url}/post/${response.rows[0].id}`
 
-        try {
-          await postTwitter(body.title_rrss, link)
-        } catch (e) {
-          console.log(e)
-        }
+        // try {
+        //   await postTwitter(body.title_rrss, link)
+        // } catch (e) {
+        //   console.log(e)
+        // }
 
         try {
           await postFacebook(body.title_rrss, link)
