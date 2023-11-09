@@ -40,6 +40,7 @@ export const Category = ({posts, name, timeline}: Props) => {
             bg={"#d13030"}
             size={"sm"}
             color={"white"}
+            textTransform={"uppercase"}
           >
             {
               name

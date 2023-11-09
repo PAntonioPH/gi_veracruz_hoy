@@ -17,7 +17,7 @@ interface PropsPost {
 }
 
 interface PropsCategory {
-  estado: PropsPost[],
+  veracruz: PropsPost[],
   deportes: PropsPost[],
   espectaculos: PropsPost[],
   nacional: PropsPost[],
@@ -34,7 +34,7 @@ const Index = () => {
   const router = useRouter()
   const [data, setData] = useState<PropsCategories>({
     categoriesPosts: {
-      estado: [],
+      veracruz: [],
       deportes: [],
       espectaculos: [],
       nacional: [],
@@ -49,6 +49,7 @@ const Index = () => {
     axios.get('/api/v1/home', {headers: {Authorization: `${process.env.NEXT_PUBLIC_TOKEN_WEB}`}})
       .then(res => {
         setData(res.data.response)
+        console.log(res.data.response)
       })
       .finally(() => setIsLoading(false))
   }, [])
@@ -66,8 +67,8 @@ const Index = () => {
             />
 
             <Category
-              posts={data.categoriesPosts.estado}
-              name={"Estado"}
+              posts={data.categoriesPosts.veracruz}
+              name={"Veracruz"}
             />
 
             <Category

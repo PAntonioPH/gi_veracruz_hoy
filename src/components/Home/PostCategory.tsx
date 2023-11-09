@@ -35,6 +35,7 @@ export const PostCategory = ({post: {img, category_name, category, title, id}}: 
         px={5}
         bg={"#bf3030"}
         color={"white"}
+        textTransform={"uppercase"}
       >
         {
           category_name

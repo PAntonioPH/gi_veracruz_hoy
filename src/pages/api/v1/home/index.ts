@@ -42,9 +42,9 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         let responseTemp = await conn.query(`SELECT c.id, c.name, c.father
                                              FROM categories c
-                                             WHERE c.id != 0 
-                                                   AND c.active = true
-                                             AND c.father IS NULL
+                                             WHERE c.id != 0
+                                               AND c.active = true
+                                               AND c.father IS NULL
                                              ORDER BY c.id; `)
 
         let categories: Category[] = responseTemp.rows;
@@ -65,7 +65,8 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
                                                      WHERE p.active = true
                                                        AND p.id_post_type = 1
                                                        AND p.id_category = '${id}'
-                                                     ORDER BY p.id DESC LIMIT 5;`)
+                                                     ORDER BY p.id DESC
+                                                     LIMIT 5;`)
 
           if (categoryResponse.rows.length > 0) categoryResponse.rows.forEach((post: any) => post.content = decodeHTML5(post.content).replace(/<[^>]*>?/gm, ''));
 
@@ -86,7 +87,8 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
                                                      JOIN categories c on p.id_category = c.id
                                             WHERE p.active = true
                                               AND p.id_post_type = 1
-                                            ORDER BY p.id DESC LIMIT 10;`)
+                                            ORDER BY p.id DESC
+                                            LIMIT 10;`)
 
         if (lastPosts.rows.length > 0) lastPosts.rows.forEach((post: any) => post.content = decodeHTML5(post.content).replace(/<[^>]*>?/gm, ''));
 
@@ -110,7 +112,8 @@ const Home = async (req: NextApiRequest, res: NextApiResponse) => {
                                                      WHERE p.active = true
                                                        AND p.id_post_type = 1
                                                        AND p.id_category = '${id}'
-                                                     ORDER BY p.id DESC LIMIT 1;`)
+                                                     ORDER BY p.id DESC
+                                                     LIMIT 1;`)
 
           if (categoryResponse.rows.length > 0) categoryResponse.rows.forEach((post: any) => post.content = decodeHTML5(post.content).replace(/<[^>]*>?/gm, ''));
 

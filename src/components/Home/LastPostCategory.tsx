@@ -34,6 +34,7 @@ export const LastPostCategory = ({post: {img, category_name, title, content, cat
         px={5}
         bg={"#bf3030"}
         color={"white"}
+        textTransform={"uppercase"}
       >
         {
           category_name
