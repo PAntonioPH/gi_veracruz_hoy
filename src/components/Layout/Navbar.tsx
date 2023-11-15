@@ -47,7 +47,7 @@ export const Navbar = () => {
             src='/assets/icons/portada.jpg'
             alt='Portada'
             w={'full'}
-            h={'200px'}
+            h={'450px'}
             onClick={() => router.push('/')}
             cursor={'pointer'}
           />
