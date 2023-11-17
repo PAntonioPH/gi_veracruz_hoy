@@ -47,6 +47,16 @@ export const grupoHoy = {
       "father": 6,
       "url": "https://pueblahoy.com.mx/",
       "father_name": "Grupo Hoy"
+    },
+    {
+      "id": -6,
+      "name": "Tlaxcala Hoy",
+      "active": true,
+      "date_update": "2023-09-14T06:00:00.000Z",
+      "time_update": "11:08:34",
+      "father": 6,
+      "url": "https://tlaxcalahoy.com/",
+      "father_name": "Grupo Hoy"
     }
   ]
 }
