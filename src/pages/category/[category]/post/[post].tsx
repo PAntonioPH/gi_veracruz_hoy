@@ -37,7 +37,7 @@ const Post = ({post}: Props) => {
 
         <meta property="og:title" content={post.title}/>
         <meta property="og:type" content="article"/>
-        <meta property="og:description" content="El alma de la noticia"/>
+        <meta property="og:description" content="El alma de la nación"/>
         <meta property="og:image:width" content="600"/>
         <meta property="og:image:height" content="314"/>
         <meta property="og:image" content={post.img ? post.img : "https://veracruzhoy.com.mx/assets/icons/logo.png"}/>

@@ -25,6 +25,7 @@ export const LayoutSingle = (props: Props) => {
         <link rel="shortcut icon" href="/assets/icons/favicon.ico"/>
 
         <meta property="og:title" content="Veracruz Hoy"/>
+        <meta property="og:description" content="El alma de la nación"/>
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="https://veracruzhoy.com.mx"/>
         <meta property="og:image" content="https://veracruzhoy.com.mx/assets/icons/logoMeta.jpg"/>
@@ -47,7 +48,7 @@ export const LayoutSingle = (props: Props) => {
             direction="column"
             flex="1"
             w={{base: "100%", md: "70%"}}
-            mx={{base:0, md:"40"}}
+            mx={{base: 0, md: "40"}}
             {...props}
           >
             <Placeholder bg="bg-accent">

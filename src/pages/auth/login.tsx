@@ -67,9 +67,9 @@ const Login = () => {
 
         <meta property="og:title" content="Veracruz Hoy"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:description" content="El alma de la noticia"/>
+        <meta property="og:description" content="El alma de la nación"/>
         <meta property="og:url" content="https://veracruzhoy.com.mx"/>
-        <meta property="og:description" content="El alma de la noticia"/>
+        <meta property="og:description" content="El alma de la nación"/>
         <meta property="og:image:width" content="600"/>
         <meta property="og:image:height" content="314"/>
         <meta property="og:image" content="https://veracruzhoy.com.mx/assets/icons/logoMeta.jpg"/>

@@ -49,13 +49,12 @@ const Index = () => {
     axios.get('/api/v1/home', {headers: {Authorization: `${process.env.NEXT_PUBLIC_TOKEN_WEB}`}})
       .then(res => {
         setData(res.data.response)
-        console.log(res.data.response)
       })
       .finally(() => setIsLoading(false))
   }, [])
 
   return (
-    <LayoutSingle title={"Veracruz Hoy"}>
+    <LayoutSingle title={"Veracruz Hoy - El alma de la nación"}>
       {
         isLoading
           ? (<LoadingPage/>)
